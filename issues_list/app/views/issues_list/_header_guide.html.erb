@@ -1,0 +1,14 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag "main.css", :plugin => "issues_list"  %>
+<% end %>
+
+<div id="header_guide">
+    <span class="header_tag <% if @action=='related'%>header_tag_selected<%end%>">
+        <%= link_to l(:issues_list_relation_header_tag),{:action=>'related',:project_id=>@project.id}  %>
+    </span>
+    <span class="header_tag <% if @action=='was_assigned_to_me'%>header_tag_selected<%end%>">
+        <%= link_to l(:issues_list_was_assigned_to_me_header_tag),{:action=>'was_assigned_to_me',:project_id=>@project.id} %>
+    </span>
+</div>
+
+<div style="clear: both;"></div>

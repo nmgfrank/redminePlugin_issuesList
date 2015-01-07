@@ -1,0 +1,115 @@
+    <div class="plugin_header_filter">
+        <fieldset>
+            <legend>Filter</legend>
+            <form action="/issues_list/<%= @action %>"  style="width: 100%;">    
+                <input type="hidden" name="project_id" value="<%= @project.id %>" />
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 100px;"><%= l(:plugin_project_label) %>:</td>
+                        <td>
+                                <% @project.self_and_descendants.each do |proj| %>
+                                    
+                                    <input type="checkbox" class="project_checkbox"
+                                    name="selected_project_ids[]" 
+                                    class="selected_project_ids"
+                                    value="<%= proj.id %>"
+                                    <% if @project_ids.include? proj.id.to_s %>
+                                        checked="checked"
+                                    <% end %>
+                                      /><%= proj.name %>
+                                <% end %>
+                                <input id="project_select_all_button" type="button" style="height: 20px;float: right;" value="全选"  />
+                                <input id="project_select_rev_button"  type="button" style="height: 20px;float: right;"  value="反选"  />
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><%= l(:plugin_trace_label) %>:</td>
+                        <td>
+                                <% @issue_tracker_array.each do |issue_tracker| %>
+                                    <input 
+                                    type="checkbox" 
+                                    name="selected_tracker_ids[]"
+                                    class="selected_tracker_ids"
+                                    value="<%= issue_tracker.attributes['id'] %>"
+                                    <% if @tracker_ids.include? issue_tracker.attributes['id'].to_s %>
+                                        checked="checked"
+                                    <% end %>
+                                     />
+                                    <%= issue_tracker.attributes['name'] %>
+                                <% end %>           
+                        </td>
+                    </tr> 
+                    
+                    <% if @action=="related" && @relation_types.length > 0 %>
+                    <tr>
+                        <td><%= l(:issues_list_relation_type) %>:</td>
+                        <td>
+                                <% @relation_types.each do |relation_type| %>
+                                    <input 
+                                    type="checkbox" 
+                                    name="selected_relation_types[]"
+                                    class="selected_relation_types"
+                                    value="<%= relation_type %>"
+                                    <% if @selected_relation_types.include? relation_type  %>
+                                        checked="checked"
+                                    <% end %>
+                                     />
+                                    <% if relation_type == "relates" %>
+                                        <%= l(:issues_list_relates) %>
+                                    <% elsif relation_type == "blocks" %>
+                                        <%= l(:issues_list_blocks) %>
+                                    <% elsif relation_type == "copied_to" %>
+                                        <%= l(:issues_list_copied_to) %>
+                                    <% elsif relation_type == "duplicates" %>
+                                        <%= l(:issues_list_duplicates) %>
+                                    <% elsif relation_type == "precedes" %>
+                                        <%= l(:issues_list_precedes) %>
+                                    <% else  %>
+                                        <%= relation_type %>
+                                    <% end %>
+                                <% end %>           
+                        </td>
+                    </tr>                     
+                    <% end %>
+                    
+                    
+                                     
+                </table> 
+                <input type="submit" value="应用" />
+            </form> 
+        </fieldset>  
+        <div id="notice" style="color: #777777;"></div>       
+    </div>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+      
+        
+        $("#project_select_all_button").click(function() {
+            $(".project_checkbox").each(function() {
+                $(this).attr("checked","checked");
+            });
+        });
+    
+        $("#project_select_rev_button").click(function() {
+            $(".project_checkbox").each(function() {
+                if ($(this).attr("checked") == "checked" || $(this).attr("checked") == true) {
+                    $(this).removeAttr("checked");  
+                } else {
+                    $(this).attr("checked","checked");
+                }
+            });
+        });
+    
+    
+    });
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,29 @@
+zh:
+  issues_list_project_button_label: "特殊问题"
+  issues_list_relation_type: "关联类型"
+  
+  issues_list_relation_header_tag: "关联"
+  issues_list_was_assigned_to_me_header_tag: "曾指派给我"
+  
+  issues_list_relates: "关联"
+  issues_list_blocks: "阻塞"
+  issues_list_copied_to: "复制"
+  issues_list_duplicates: "重复"
+  issues_list_precedes: "跟随"
+  
+  
+  issues_list_subject: "主题"
+  issues_list_project: "项目"
+  issues_list_status: "状态"
+  issues_list_assigned_to: "指派者"
+  issues_list_update_time: "更新时间"
+  
+  issues_list_expand: "展开"
+  issues_list_fold: "收起"
+  
+  
+  project_module_issues_list: "特殊问题"
+  
+  permission_related_issues: "关联"
+  permission_was_assigned_to_me_issues: "曾指派给我"
+  

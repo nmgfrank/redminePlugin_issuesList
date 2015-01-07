@@ -1,0 +1,30 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+  issues_list_project_button_label: "Special Issues"
+  issues_list_relation_header_tag: "Related"
+  issues_list_was_assigned_to_me_header_tag: "Was Assigned To Me"
+  
+  issues_list_relates: "relates"
+  issues_list_blocks: "blocks"
+  issues_list_copied_to: "copied_to"
+  issues_list_duplicates: "duplicates"
+  issues_list_precedes: "precedes"  
+  
+  
+  issues_list_relation_type: "Relation Type"
+  
+  issues_list_subject: "Subject"
+  issues_list_project: "Project"
+  issues_list_status: "Status"
+  issues_list_assigned_to: "Assigned To"
+  issues_list_update_time: "Update Time"
+  
+  issues_list_expand: "Expand"
+  issues_list_fold: "Fold"
+  
+  
+  project_module_issues_list: "Special Issues"
+  
+  permission_related_issues: "Related"
+  permission_was_assigned_to_me_issues: "Was Assigned To Me"

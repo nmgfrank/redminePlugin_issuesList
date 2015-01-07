@@ -1,0 +1,75 @@
+
+<%= render :partial=>'header_guide'  %>
+<%= render :partial=>'plugin_header_filter'  %>
+
+<% if !@group_panel.blank? %>
+    <table style="width: 100%;" cellspacing="0" cellpadding="0" border="0" >
+        <tr>
+            <th style="width: 60px;">Id</th>
+            <th><%= l(:issues_list_subject) %></th>
+            <th><%= l(:issues_list_status) %></th>
+            <th><%= l(:issues_list_project) %></th>
+        </tr>
+        <%  @group_panel.each do |relation_type, subgroups|   %>
+            <tr ><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr style="text-align: center;">
+                <td style="width: 60px;"></td>
+                <td >
+                ******     
+                    <% if relation_type == "relates" %>
+                        <%= l(:issues_list_relates) %>
+                    <% elsif relation_type == "blocks" %>
+                        <%= l(:issues_list_blocks) %>
+                    <% elsif relation_type == "copied_to" %>
+                        <%= l(:issues_list_copied_to) %>
+                    <% elsif relation_type == "duplicates" %>
+                        <%= l(:issues_list_duplicates) %>
+                    <% elsif relation_type == "precedes" %>
+                        <%= l(:issues_list_precedes) %>
+                    <% else  %>
+                        <%= relation_type %>
+                    <% end %> ( <%=  subgroups.count %> )               
+                ******
+                </td>
+                <td></td>
+                <td class="show"><a id="toggle_<%= relation_type %>" class="toggle_button"><%=  l(:issues_list_fold) %></a></td></tr>
+            <% cnt = 0 %>
+            <% subgroups.each do |subgroup| %>
+            
+                
+                <% subgroup.uniq.each do |issue_id| %>
+                    <tr class="tr_<%= relation_type %> <% if cnt % 2 == 0 %>odd_lines<% else %>even_lines<% end %>">
+                        <td><a href="/issues/<%= issue_id %>" target="_blank">#<%= issue_id %> :</a> </td>
+                        <td><%=  @issue_hash[issue_id][:subject] %></td>
+                        <td><%=  @issue_hash[issue_id][:status] %></td>  
+                        <td><%=  @issue_hash[issue_id][:project] %></td> 
+                    </tr>  
+                <% end %>
+                <% cnt += 1 %>
+                
+            <% end %>
+        <%  end %>
+    </table>
+<% end  %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $(".toggle_button").click(function() {
+        cls = $(this).attr("id");
+        relation_type = cls.substring(7);
+        status = $(this).parent().attr("id");
+        if (status == "hide") {
+            $(".tr_"+ relation_type).show();
+            $(this).parent().attr("id", "show");
+            $(this).html("<%=  l(:issues_list_fold) %>");
+        } else {
+            $(".tr_"+ relation_type).hide();
+            $(this).parent().attr("id", "hide");
+            $(this).html("<%=  l(:issues_list_expand) %>");
+        } 
+    });
+    
+});
+
+</script>

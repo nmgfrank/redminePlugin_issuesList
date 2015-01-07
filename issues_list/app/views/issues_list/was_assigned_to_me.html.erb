@@ -1,0 +1,26 @@
+
+<%= render :partial=>'header_guide'  %>
+<%= render :partial=>'plugin_header_filter'  %>
+
+<% if !@issues.blank? %>
+    <table style="width: 100%">
+    <tr>
+        <th style="width: 60px;">Id</th>
+        <th><%= l(:issues_list_subject) %></th>
+        <th style="width: 80px;text-align: center;"><%= l(:issues_list_assigned_to) %></th>
+        <th style="width: 30px;text-align: center;"></th>
+        <th style="width: 80px;text-align: center;"><%= l(:issues_list_assigned_to) %></th>
+        <th><%= l(:issues_list_update_time) %></th>
+    </tr>
+    <% @issues.each do |issue| %>
+        <tr>
+            <td><a href="/issues/<%= issue['issue_id'] %>" target="_blank">#<%= issue['issue_id'] %></td>
+            <td><%= issue['subject'] %></td>
+            <td style="width: 80px;text-align: center;"><%= issue['from_lastname'] %> <%= issue['from_firstname'] %></td>
+            <td style="width: 25px;text-align: center;">-></td>
+            <td style="width: 80px;text-align: center;"><%= issue['to_lastname'] %> <%= issue['to_firstname'] %></td>
+            <td style="text-align: center;"><%= issue['latest_time'] %></td>
+        <tr>
+    <% end %>
+    </table>
+<%  end %>
